@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <!-- Jméno a příjmení: Petr Bednarski -->
+  <!-- E-mail: petrbednarski@seznam.cz -->
+  <!-- Discord: pettik_ (PetrB) -->
+  <!-- Github.com: https://github.com/pettik -->
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <!--=============== FAVICON ===============-->
+    <link
+      rel="shortcut icon"
+      href="assets/img/favicon.ico"
+      type="image/x-icon"
+    />
+    <!--=============== REMIXICONS ===============-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.6.0/remixicon.css"
+    />
+    <!--=============== LINK SWIPER'S CSS ===============-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+    <!--=============== My own CSS styles ===============-->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Engeto.cz | Bednarski Petr | Cards</title>
+  </head>
+  <body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="#" class="nav__logo">
+          <span>Veselé</span>
+          <span>Vánoce</span>
+        </a>
+
+        <div class="nav__buttons">
+          <div class="nav__volume" id="nav-volume">
+            <i class="ri-volume-mute-line nav__icon"></i>
+            <i class="ri-volume-up-line nav__icon"></i>
+          </div>
+          <div class="nav__theme" id="nav-theme">
+            <i class="ri-moon-line nav__icon"></i>
+            <i class="ri-lightbulb-line nav__icon"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!--==================== MAIN ====================-->
+    <main class="main">
+      <div class="main__container container">
+
+         <h2 class="main-title">Vánoční nákupy</h2>
+<div class="swiper mySwiper">
+                <div class="accessory__container swiper-wrapper ">
+
+
+
+                </div>
+               </div>
+      </div>
+   </div>
+   <div class="main__blob"></div>
+    </main>
+    <!--=============== SNOW EFFECT JS ===============-->
+    <script src="assets/js/snow.js"></script>
+    <!--=============== LINK SWIPER'S JS ===============-->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <!--=============== MY JS Code ===============-->
+        <script>
+            // My array
+
+const products = [
+  {
+    'name': 'Sněhová koule',
+    'src-img': 'assets/img/accessory1.png',
+    'price': 94.5,
+    'category': 'Doplňky do domácnosti',
+  },
+  {
+    'name': 'Vánoční lízátko',
+    'src-img': 'assets/img/accessory2.png',
+    'price': 15.4,
+    'category': 'Vánoční dobroty',
+  },
+  {
+    'name': 'Andělíček',
+    'src-img': 'assets/img/accessory3.png',
+    'price': 34.2,
+    'category': 'Doplňky do domácnosti',
+  },
+  {
+    'name': 'Červená baňka',
+    'src-img': 'assets/img/accessory4.png',
+    'price': 42.5,
+    'category': 'Vánoční dekorace',
+  },
+  {
+    'name': 'Vánoční překvapení',
+    'src-img': 'assets/img/accessory5.png',
+    'price': 99.99,
+    'category': 'Velké překvapení',
+  },
+];
+
+// <!--=============== SWIPER JS JS ===============-->
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Funkce pro generování produktů
+  function generateProducts() {
+  const productsContainer = document.querySelector('.accessory__container.swiper-wrapper');
+
+  products.forEach(function (item) {
+    // Formátování ceny na dvě desetinná místa
+    let displayedPrice = item.price.toFixed(2);
+
+    const productDiv = document.createElement('div');
+    productDiv.className = 'swiper-slide accessory__content';
+
+    productDiv.innerHTML = `
+      <img src="${item['src-img']}" alt="" class="accessory__img">
+      <h3 class="accessory__title">${item.name}</h3>
+      <span class="accessory__category">${item.category}</span>
+      <span class="accessory__price">${displayedPrice} Kč</span>
+      <a href="#" class="button accessory__button"><i class='ri-shopping-cart-line'></i></a>
+    `;
+
+    productsContainer.appendChild(productDiv);
+  });
+}
+
+// Spustit generování produktů po načtení DOM
+  generateProducts();
+
+  var swiper = new Swiper('.mySwiper', {
+  effect: 'cards',
+  grabCursor: true,
+});
+
+
+// Nastavení hudby
+var backgroundMusic = document.getElementById('background-music');
+  backgroundMusic.volume = 0.3; // Nastavení hlasitosti na 50%
+  backgroundMusic.play(); // Spuštění hudby
+
+  var navVolume = document.getElementById('nav-volume');
+  var volumeIcon = navVolume.querySelector('.ri-volume-mute-line');
+  var volumeIcon2 = navVolume.querySelector('.ri-volume-up-line'); // Předpokládá, že ikona je v HTML jako ri-volume-mute-line
+
+  function updateVolumeIcon() {
+    if (backgroundMusic.muted) {
+      volumeIcon.classList.add('ri-volume-mute-line');
+      volumeIcon.classList.remove('ri-volume-up-line');
+      volumeIcon2.classList.add('ri-volume-mute-line');
+      volumeIcon2.classList.remove('ri-volume-up-line');
+      navVolume.classList.remove('nav-volume-active');
+    } else {
+      volumeIcon.classList.remove('ri-volume-mute-line');
+      volumeIcon.classList.add('ri-volume-up-line');
+      volumeIcon2.classList.remove('ri-volume-mute-line');
+      volumeIcon2.classList.add('ri-volume-up-line');
+      navVolume.classList.add('nav-volume-active');
+    }
+  }
+
+  navVolume.addEventListener('click', function() {
+    backgroundMusic.muted = !backgroundMusic.muted;
+    updateVolumeIcon(); // Aktualizace ikony a barvy pozadí
+  });
+
+  // Inicializace ikony a barvy pozadí při prvním načtení
+  updateVolumeIcon();
+  //   konec DOMContentLoaded
+});
+
+
+
+
+        </script>
+
+        <!-- Audio element -->
+<audio id="background-music" src="assets/mp3/holly_dazed.mp3" loop></audio>
+  </body>
+</html>

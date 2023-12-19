@@ -1,0 +1,417 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Gwendolyn:wght@700&family=Montserrat:wght@400;700&display=swap');
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 4rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(72, 59%, 45%);
+  --first-color-alt: hsl(72, 75%, 38%);
+  --second-color: hsl(151, 80%, 28%);
+  --gradient-color: linear-gradient(
+    180deg,
+    hsl(151, 61%, 21%),
+    hsl(151, 80%, 28%)
+  );
+  --first-color-dark: hsl(151, 52%, 17%);
+  --first-color-darker: hsl(151, 52%, 12%);
+  --title-color: hsl(60, 96%, 91%);
+  --text-color: hsl(99, 20%, 65%);
+  --accesory-content-color: #fff;
+  --accesory-text-color: #fff;
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Montserrat', sans-serif;
+  --second-font: 'Gwendolyn', cursive;
+  --biggest-font-size: 2rem;
+  --h1-font-size: 1.8rem;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: 0.938rem;
+  --smaller-font-size: 0.75rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-bold: 700;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-super-fixed: 999;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1150px) {
+  :root {
+    --biggest-font-size: 2.25rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background: var(--gradient-color) no-repeat;
+  color: var(--text-color);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+.main {
+  overflow: hidden;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+
+  justify-items: center;
+  position: relative;
+}
+
+.main-title {
+  font-size: var(--h1-font-size);
+  color: var(--title-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.main__blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-color: var(--first-color-dark);
+  border-radius: 4rem;
+  transform: rotate(45deg);
+  left: -25rem;
+  top: 6rem;
+  z-index: -1;
+}
+
+/*=============== CARD EFFECTS STYLES ===============*/
+
+.swiper {
+  width: 290px;
+  height: 400px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.swiper-slide:nth-child(1n) {
+  background-color: rgb(206, 17, 17);
+}
+
+.swiper-slide:nth-child(2n) {
+  background-color: rgb(0, 140, 255);
+}
+
+.swiper-slide:nth-child(3n) {
+  background-color: rgb(10, 184, 111);
+}
+
+.swiper-slide:nth-child(4n) {
+  background-color: rgb(211, 122, 7);
+}
+
+.swiper-slide:nth-child(5n) {
+  background-color: rgb(118, 163, 12);
+}
+
+.swiper-slide:nth-child(6n) {
+  background-color: rgb(180, 10, 47);
+}
+
+.swiper-slide:nth-child(7n) {
+  background-color: rgb(35, 99, 19);
+}
+
+.swiper-slide:nth-child(8n) {
+  background-color: rgb(0, 68, 255);
+}
+
+.swiper-slide:nth-child(9n) {
+  background-color: rgb(218, 12, 218);
+}
+
+.swiper-slide:nth-child(10n) {
+  background-color: rgb(54, 94, 77);
+}
+
+/*=============== HEADER & NAV ===============*/
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /* background-color: var(--first-color-dark); */
+  background-color: var(--second-color);
+  z-index: var(--z-super-fixed);
+}
+
+.nav,
+.nav__logo,
+.nav__buttons {
+  display: flex;
+}
+
+.nav {
+  position: relative;
+  height: var(--header-height);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav__logo span:nth-child(1) {
+  color: var(--first-color);
+  font-size: var(--h1-font-size);
+  font-family: var(--second-font);
+  transform: translateY(6px);
+}
+
+.nav__logo span:nth-child(2) {
+  transform: translateY(-6px);
+  font-size: var(--h2-font-size);
+}
+
+.nav__buttons {
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.nav__volume,
+.nav__theme {
+  font-size: 1.25rem;
+  color: var(--title-color);
+  cursor: pointer;
+  box-shadow: 0 4px 24px hsla(0, 0%, 0%, 0.2);
+  width: 50px;
+  height: 50px;
+  border-radius: 0.75rem;
+  display: grid;
+  place-items: center;
+  transition: background-color 0.4s, color 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav__volume i,
+.nav__theme i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease-in-out;
+}
+
+.nav__volume i:nth-child(1) {
+  transform: translateX(-100%);
+}
+.nav__volume:hover i:nth-child(1) {
+  transform: translateX(0);
+}
+.nav__volume i:nth-child(2) {
+  transform: translateX(0);
+}
+.nav__volume:hover i:nth-child(2) {
+  transform: translateX(100%);
+}
+
+.nav__theme i:nth-child(1) {
+  transform: translateX(-100%);
+}
+.nav__theme:hover i:nth-child(1) {
+  transform: translateX(0);
+}
+.nav__theme i:nth-child(2) {
+  transform: translateX(0);
+}
+.nav__theme:hover i:nth-child(2) {
+  transform: translateX(100%);
+}
+
+.nav__volume {
+  background-color: var(--first-color);
+}
+
+.nav__volume:hover {
+  background-color: var(--first-color-alt);
+  color: var(--first-color-dark);
+}
+
+.nav-volume-active {
+  background-color: var(--first-color-darker);
+}
+.nav__theme {
+  background-color: var(--first-color);
+}
+.nav__theme:hover {
+  background-color: var(--first-color-darker);
+  color: var(--first-color-alt);
+}
+
+/*=============== CARDS ===============*/
+
+.accessory__content {
+  color: var(--accesory-text-color);
+  position: relative;
+  display: grid;
+  padding: 0.25rem 0.75rem 0.75rem;
+  background-color: var(--accesory-content-color);
+  box-shadow: 0 2px 6px rgba(65, 11, 16, 0.15);
+  border-radius: 1rem;
+}
+
+.accessory__content:hover {
+  box-shadow: 0 3px 12px rgba(65, 11, 16, 0.15);
+}
+
+.accessory__img {
+  width: 210px;
+  background-color: var(--accesory-content-color);
+  border-radius: 50%;
+  padding: 1rem;
+  justify-self: center;
+  margin-bottom: 0.25rem;
+}
+
+.accessory__title,
+.accessory__category {
+  text-align: center;
+}
+
+.accessory__title {
+  font-size: var(--biggest-font-size);
+}
+
+.accessory__category {
+  font-size: var(--small-font-size);
+  margin-bottom: var(--mb-1);
+  color: var(--text-color-light);
+}
+
+.accessory__price {
+  font-weight: var(--font-semi-bold);
+  color: var(--title-color);
+}
+
+.accessory__button {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  display: flex;
+  font-size: 1.5rem;
+  padding: 1rem 2rem 2rem 1rem;
+  border-radius: 1rem 0 1rem 0;
+  background-color: var(--accesory-content-color);
+  color: var(--first-color-dark);
+}
+
+/*========== BUTTONS ==========*/
+.button {
+  display: inline-block;
+
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: var(--font-semi-bold);
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: var(--first-color-dark);
+  color: var(--accesory-text-color);
+}
+
+/*=============== MEDIA QUERIES ===============*/
+@media screen and (min-width: 968px) {
+  .swiper {
+    width: 340px;
+    height: 450px;
+  }
+
+  .main__blob {
+    width: 800px;
+    height: 800px;
+    left: -19rem;
+  }
+
+  .accessory__content {
+    padding: 0.5rem 1.5rem 1.5rem;
+  }
+
+  .accessory__img {
+    width: 180px;
+    margin-bottom: var(--mb-1);
+  }
+
+  .accessory__title,
+  .accessory__category {
+    text-align: initial;
+  }
+
+  .accessory__button {
+    padding: 0.75rem;
+  }
+}
+@media screen and (min-width: 1120px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .accessory__button {
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    display: flex;
+    font-size: 1.5rem;
+    padding: 1.25rem 2rem 1.25rem 2rem;
+  }
+}
