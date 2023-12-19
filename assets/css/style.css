@@ -7,18 +7,18 @@
 
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(72, 59%, 45%);
-  --first-color-alt: hsl(72, 75%, 38%);
-  --second-color: hsl(151, 80%, 28%);
+  --first-color: hsl(228, 20%, 90%);
+  --first-color-alt: hsl(233, 75%, 38%);
+  --second-color: hsla(217, 91%, 40%, 0.811);
   --gradient-color: linear-gradient(
-    180deg,
-    hsl(151, 61%, 21%),
-    hsl(151, 80%, 28%)
+    90deg,
+    hsl(232, 93%, 42%),
+    hsl(219, 78%, 49%)
   );
-  --first-color-dark: hsl(151, 52%, 17%);
-  --first-color-darker: hsl(151, 52%, 12%);
-  --title-color: hsl(60, 96%, 91%);
-  --text-color: hsl(99, 20%, 65%);
+  --first-color-dark: hsl(259, 91%, 34%);
+  --first-color-darker: hsl(234, 92%, 62%);
+  --title-color: hsl(233, 100%, 29%);
+  --text-color: hsl(233, 98%, 25%);
   --accesory-content-color: #fff;
   --accesory-text-color: #fff;
 
@@ -54,6 +54,24 @@
   }
 }
 
+/*========== Variables Dark theme ==========*/
+body.dark-theme {
+  --first-color: hsl(72, 59%, 45%);
+  --first-color-alt: hsl(72, 75%, 38%);
+  --second-color: hsl(151, 80%, 28%);
+  --gradient-color: linear-gradient(
+    180deg,
+    hsl(151, 61%, 21%),
+    hsl(151, 80%, 28%)
+  );
+  --first-color-dark: hsl(151, 52%, 17%);
+  --first-color-darker: hsl(151, 52%, 12%);
+  --title-color: hsl(60, 96%, 91%);
+  --text-color: hsl(99, 20%, 65%);
+  --accesory-content-color: #fff;
+  --accesory-text-color: #fff;
+}
+
 /*=============== BASE ===============*/
 * {
   box-sizing: border-box;
@@ -66,6 +84,7 @@ body {
   font-size: var(--normal-font-size);
   background: var(--gradient-color) no-repeat;
   color: var(--text-color);
+  transition: background 0.4s; /* for dark mode animation */
 }
 
 ul {
@@ -98,10 +117,10 @@ img {
   position: relative;
 }
 
-.main-title {
+.main__title {
   font-size: var(--h1-font-size);
   color: var(--title-color);
-  margin-bottom: 2rem;
+  margin-block: 2rem;
   text-align: center;
 }
 
@@ -254,12 +273,15 @@ img {
 .nav__volume i:nth-child(1) {
   transform: translateX(-100%);
 }
+
 .nav__volume:hover i:nth-child(1) {
   transform: translateX(0);
 }
+
 .nav__volume i:nth-child(2) {
   transform: translateX(0);
 }
+
 .nav__volume:hover i:nth-child(2) {
   transform: translateX(100%);
 }
@@ -267,12 +289,15 @@ img {
 .nav__theme i:nth-child(1) {
   transform: translateX(-100%);
 }
+
 .nav__theme:hover i:nth-child(1) {
   transform: translateX(0);
 }
+
 .nav__theme i:nth-child(2) {
   transform: translateX(0);
 }
+
 .nav__theme:hover i:nth-child(2) {
   transform: translateX(100%);
 }
@@ -289,9 +314,11 @@ img {
 .nav-volume-active {
   background-color: var(--first-color-darker);
 }
+
 .nav__theme {
   background-color: var(--first-color);
 }
+
 .nav__theme:hover {
   background-color: var(--first-color-darker);
   color: var(--first-color-alt);
@@ -400,6 +427,7 @@ img {
     padding: 0.75rem;
   }
 }
+
 @media screen and (min-width: 1120px) {
   .container {
     margin-left: auto;
