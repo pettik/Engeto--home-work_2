@@ -1,4 +1,4 @@
-# CZ: ENGETO.CZ - #2 Domácí úkol - Responzivní životopis
+# CZ: ENGETO.CZ - #2 Domácí úkol - Produktová karta
 
 ## Zadání úkolu
 
@@ -48,7 +48,7 @@ Odkaz na HTML/CSS/JS stránku mého finálního řešení:
 
 <hr>
 
-# EN: ENGETO.CZ - #2 Homework - Responsive Resume
+# EN: ENGETO.CZ - #2 Homework - Product card
 
 ## Task Description
 
