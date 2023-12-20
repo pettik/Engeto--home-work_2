@@ -5,32 +5,93 @@ const products = [
     name: 'Sněhová koule',
     'src-img': 'assets/img/accessory1.png',
     price: 94.5,
-    category: 'Doplňky do domácnosti',
+    stock:4,
+    description: 'Zábavné těžítko',
   },
   {
     name: 'Vánoční lízátko',
     'src-img': 'assets/img/accessory2.png',
     price: 15.4,
-    category: 'Vánoční dobroty',
+    stock:10,
+    description: 'Vánoční dobroty',
   },
   {
     name: 'Andělíček',
     'src-img': 'assets/img/accessory3.png',
     price: 34.2,
-    category: 'Doplňky do domácnosti',
+    stock:18,
+    description: 'Vánoční dekorace',
   },
   {
     name: 'Červená baňka',
     'src-img': 'assets/img/accessory4.png',
-    price: 42.5,
-    category: 'Vánoční dekorace',
+    price: 12.5,
+    stock:37,
+    description: 'Přináší štěstí',
   },
   {
     name: 'Vánoční překvapení',
     'src-img': 'assets/img/accessory5.png',
     price: 99.99,
-    category: 'Velké překvapení',
+    stock:99,
+    description: 'Překvapení uvnitř',
   },
+  {
+    name: 'Zelená baňka',
+    'src-img': 'assets/img/accessory6.png',
+    price: 15.20,
+    stock:85,
+    description: 'Vánoční dekorace',
+  },
+  {
+    name: 'Vánoční stromek',
+    'src-img': 'assets/img/accessory7.png',
+    price: 299.5,
+    stock:22,
+    description: 'Blikající stormeček',
+  },
+  {
+    name: 'Santova čepice',
+    'src-img': 'assets/img/accessory8.png',
+    price: 99.99,
+    stock:4,
+    description: 'Zateplená čepice',
+  },
+  {
+    name: 'Vánoční cukroví',
+    'src-img': 'assets/img/accessory9.png',
+    price: 180.00,
+    stock:970,
+    description: 'Cukroví (cena za 1kg)',
+  },
+  {
+    name: 'Santův sob',
+    'src-img': 'assets/img/accessory10.png',
+    price: 99449.20,
+    stock:13,
+    description: 'Obsahuje dáreček',
+  },
+  {
+    name: 'Zvonky štěstí',
+    'src-img': 'assets/img/accessory11.png',
+    price: 299.99,
+    stock:18,
+    description: 'Zazvoň pro Vánoce',
+  },
+  {
+    name: 'Vánoční věnec',
+    'src-img': 'assets/img/accessory12.png',
+    price: 174.1,
+    stock:2,
+    description: 'Vánoční dekorace',
+  },
+  {
+    name: 'Sněžné sáně',
+    'src-img': 'assets/img/accessory13.png',
+    price: 0.99,
+    stock:150,
+    description: 'AKCE - není sníh',
+  }
 ];
 
 // <!--=============== SWIPER JS JS ===============-->
@@ -42,19 +103,37 @@ document.addEventListener('DOMContentLoaded', function () {
       '.accessory__container.swiper-wrapper'
     );
 
+    productsContainer.innerHTML = ``;
+
     products.forEach(function (item) {
       // Formátování ceny na dvě desetinná místa
-      let displayedPrice = item.price.toFixed(2);
+      let originalprice = (item.price*1.3).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      let displayedPrice = item.price.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })
+
 
       const productDiv = document.createElement('div');
       productDiv.className = 'swiper-slide accessory__content';
 
       productDiv.innerHTML = `
-  <img src="${item['src-img']}" alt="" class="accessory__img">
-  <h3 class="accessory__title">${item.name}</h3>
-  <span class="accessory__category">${item.category}</span>
-  <span class="accessory__price">${displayedPrice} Kč</span>
-  <a href="#" class="button accessory__button"><i class='ri-shopping-cart-line'></i></a>
+      <span class="accessory__label">Vánoce 2023</span>
+      <div class="accessory__stock">
+         <span>Skladem<br><span class="accessory__stock__number">${item.stock}</span> ks</span>
+      </div>
+      <img src="${item['src-img']}" alt="${item.name} obrázek" class="accessory__img">
+      <h3 class="accessory__title">${item.name}</h3>
+      <span class="accessory__description">${item.description}</span>
+      <div class="accessory__price__container">
+
+      <span class="accessory__original__price">${originalprice} Kč</span>
+      <span class="accessory__price">${displayedPrice} Kč</span>
+      </div>
+      <a href="#" class="button accessory__button"><i class='ri-shopping-cart-line'></i></a>
 `;
 
       productsContainer.appendChild(productDiv);
@@ -104,7 +183,10 @@ document.addEventListener('DOMContentLoaded', function () {
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 const themeButton = document.getElementById('nav-theme');
 const darkTheme = 'dark-theme';
-const iconTheme = 'ri-lightbulb-line';
+const iconTheme = 'ri-moon-line';
+const iconTheme1 = document.querySelector('#theme-icon1');
+const iconTheme2 = document.querySelector('#theme-icon2');
+
 
 // Previously selected topic (if user selected)
 const selectedTheme = localStorage.getItem('selected-theme');
@@ -124,16 +206,32 @@ if (selectedTheme) {
   document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](
     darkTheme
   );
-  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](
-    iconTheme
-  );
+  // themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](
+  //   iconTheme
+  // );
+}
+
+const replaceIcons = ()=>{
+  if(iconTheme1.classList.contains('ri-lightbulb-line')){
+    iconTheme1.classList.add('ri-lightbulb-line');
+    iconTheme1.classList.remove('ri-moon-line');
+    iconTheme2.classList.add('ri-moon-line');
+    iconTheme2.classList.remove('ri-lightbulb-line');
+  }else{
+    iconTheme1.classList.add('ri-moon-line');
+    iconTheme1.classList.remove('ri-lightbulb-line');
+    iconTheme2.classList.add('ri-lightbulb-line');
+    iconTheme2.classList.remove('ri-moon-line');
+  }
 }
 
 // Activate / deactivate the theme manually with the button
 themeButton.addEventListener('click', () => {
   // Add or remove the dark / icon theme
   document.body.classList.toggle(darkTheme);
-  themeButton.classList.toggle(iconTheme);
+  // themeButton.classList.toggle(iconTheme);
+  replaceIcons();
+  
   // We save the theme and the current icon that the user chose
   localStorage.setItem('selected-theme', getCurrentTheme());
   localStorage.setItem('selected-icon', getCurrentIcon());
