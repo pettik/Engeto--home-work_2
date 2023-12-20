@@ -1,5 +1,4 @@
-// My array
-
+/*=============== POLE "products" ===============*/
 const products = [
   {
     name: 'Sněhová koule',
