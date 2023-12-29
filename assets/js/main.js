@@ -93,51 +93,78 @@ const products = [
   },
 ];
 
-/*=============== GENEROVÁNÍ PRODUKTŮ Z POLE PRODCUTS ===============*/
-document.addEventListener('DOMContentLoaded', function () {
-  function generateProducts() {
-    const productsContainer = document.querySelector(
-      '.accessory__container.swiper-wrapper'
-    );
+/*=============== DEKLARACE GLOBÁLNÍCH PROMĚNNÝCH ===============*/
+const overlay = document.querySelector('.main__overlay');
+const overlayBox = document.querySelector('.main__overlay__article');
+const closeBtn = document.querySelector('#main-close-btn');
 
-    productsContainer.innerHTML = ``;
+/*=============== Funkce pro formátování ceny na dvě desetinná místa ===============*/
+function formatPrice(price) {
+  return price.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
 
-    products.forEach(function (item) {
-      // Formátování ceny na dvě desetinná místa
-      let originalprice = (item.price * 1.3).toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      });
-      let displayedPrice = item.price.toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      });
+/*=============== Funkce pro generování HTML kódu ===============*/
+function generateProductHTML(item) {
+  let originalprice = formatPrice(item.price * 1.3);
+  let displayedPrice = formatPrice(item.price);
 
-      const productDiv = document.createElement('div');
-      productDiv.className = 'swiper-slide accessory__content';
-
-      productDiv.innerHTML = `
+  return `
+    <div class="swiper-slide accessory__content">
       <span class="accessory__label">Vánoce 2023</span>
       <div class="accessory__stock">
-         <span>Skladem<br><span class="accessory__stock__number">${item.stock}</span> ks</span>
+        <span>Skladem<br><span class="accessory__stock__number">${item.stock}</span> ks</span>
       </div>
       <img src="${item['src-img']}" alt="${item.name} obrázek" class="accessory__img">
       <h3 class="accessory__title">${item.name}</h3>
       <span class="accessory__description">${item.description}</span>
       <div class="accessory__price__container">
-
-      <span class="accessory__original__price">${originalprice} Kč</span>
-      <span class="accessory__price">${displayedPrice} Kč</span>
+        <span class="accessory__original__price">${originalprice} Kč</span>
+        <span class="accessory__price">${displayedPrice} Kč</span>
       </div>
       <a href="#" class="button accessory__button"><i class='ri-shopping-cart-line'></i></a>
-`;
+    </div>
+  `;
+}
 
-      productsContainer.appendChild(productDiv);
-    });
-  }
+/*=============== Funkce pro vygenerování všech produktů v poli PRODUCTS ===============*/
+function generateProducts() {
+  const productsContainer = document.querySelector(
+    '.accessory__container.swiper-wrapper'
+  );
+  productsContainer.innerHTML = ``;
 
-  // Spustit generování produktů po načtení DOM
+  products.forEach(function (item) {
+    const productHTML = generateProductHTML(item);
+    productsContainer.innerHTML += productHTML;
+  });
+}
+
+// Funkce pro zobrazení/zavření overlay
+function toggleOverlay() {
+  overlay.classList.toggle('show-overlay');
+  overlayBox.classList.toggle('show-overlay');
+}
+
+// Funkce pro obsluhu kliknutí na tlačítko přidání do košíku
+function handleAddToCartClick() {
+  const shoppingCartButtons = document.querySelectorAll('.accessory__button');
+
+  shoppingCartButtons.forEach(button => {
+    button.addEventListener('click', toggleOverlay);
+  });
+
+  closeBtn.addEventListener('click', toggleOverlay);
+  overlay.addEventListener('click', toggleOverlay);
+}
+
+/*=============== GENEROVÁNÍ PRODUKTŮ Z POLE PRODCUTS ===============*/
+document.addEventListener('DOMContentLoaded', function () {
+  /*=============== Spustit generování produktů po načtení DOM ===============*/
   generateProducts();
+  handleAddToCartClick();
 
   /*=============== SWIPER JS===============*/
   var swiper = new Swiper('.mySwiper', {
@@ -173,29 +200,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   navVolume.addEventListener('click', function () {
     toggleMusic();
-  });
-
-  /*=============== MAIN OVERLAY SHOW BOX ===============*/
-  const overlay = document.querySelector('.main__overlay');
-  const overlayBox = document.querySelector('.main__overlay__article');
-  const closeBtn = document.querySelector('#main-close-btn');
-  const shoppingCartButtons = document.querySelectorAll('.accessory__button');
-
-  shoppingCartButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      overlay.classList.add('show-overlay');
-      overlayBox.classList.add('show-overlay');
-    });
-  });
-
-  closeBtn.addEventListener('click', () => {
-    overlay.classList.remove('show-overlay');
-    overlayBox.classList.remove('show-overlay');
-  });
-
-  overlay.addEventListener('click', () => {
-    overlay.classList.remove('show-overlay');
-    overlayBox.classList.remove('show-overlay');
   });
 
   //   konec DOMContentLoaded

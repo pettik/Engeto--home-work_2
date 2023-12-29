@@ -547,7 +547,6 @@ body.dark-theme .nav__theme:hover {
 
 .accessory__description {
   font-size: var(--normal-font-size);
-  color: var(--text-color-light);
   padding-right: 4rem;
 }
 
