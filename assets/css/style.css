@@ -217,6 +217,10 @@ body.dark-theme .main__blob {
   transform: rotate(90deg);
 }
 
+.main__overlay__article img {
+  max-height: 50%;
+}
+
 .main__overlay__article__data {
   text-align: center;
 }
@@ -618,6 +622,7 @@ body.dark-theme .nav__theme:hover {
 
   .main__overlay__article img {
     max-width: 40%;
+    max-height: 100%;
   }
   .main__overlay__article__data {
     padding-inline: 2rem;
