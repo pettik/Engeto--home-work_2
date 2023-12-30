@@ -98,6 +98,10 @@ const overlay = document.querySelector('.main__overlay');
 const overlayBox = document.querySelector('.main__overlay__article');
 const closeBtn = document.querySelector('#main-close-btn');
 
+const darkTheme = 'dark-theme';
+const iconTheme = 'ri-moon-line';
+const volume_level = 0.2; // Nastavení hlasitosti na 20%
+
 /*=============== Funkce pro formátování ceny na dvě desetinná místa ===============*/
 function formatPrice(price) {
   return price.toLocaleString(undefined, {
@@ -174,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /*=============== TLAČÍTKO HUDBY ===============*/
   var backgroundMusic = document.getElementById('background-music');
-  backgroundMusic.volume = 0.3; // Nastavení hlasitosti na 30%
+  backgroundMusic.volume = volume_level;
 
   var navVolume = document.getElementById('nav-volume');
   var volumeIcon = navVolume.querySelector('.ri-volume-mute-line');
@@ -207,8 +211,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 const themeButton = document.getElementById('nav-theme');
-const darkTheme = 'dark-theme';
-const iconTheme = 'ri-moon-line';
 const iconTheme1 = document.querySelector('#theme-icon1');
 const iconTheme2 = document.querySelector('#theme-icon2');
 
@@ -230,9 +232,6 @@ if (selectedTheme) {
   document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](
     darkTheme
   );
-  // themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](
-  //   iconTheme
-  // );
 }
 
 const replaceIcons = () => {
